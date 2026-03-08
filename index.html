@@ -1,865 +1,365 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="dark">
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samsun İftar Vakti</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230b0f0d'/><path d='M62 22 C42 22 26 36 26 54 C26 72 42 84 60 84 C46 78 36 67 36 54 C36 39 48 28 62 22Z' fill='%233dba6f'/><circle cx='68' cy='30' r='5' fill='%233dba6f' opacity='0.8'/><circle cx='76' cy='44' r='3' fill='%233dba6f' opacity='0.6'/></svg>">
-<link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230b0f0d'/><path d='M62 22 C42 22 26 36 26 54 C26 72 42 84 60 84 C46 78 36 67 36 54 C36 39 48 28 62 22Z' fill='%233dba6f'/><circle cx='68' cy='30' r='5' fill='%233dba6f' opacity='0.8'/><circle cx='76' cy='44' r='3' fill='%233dba6f' opacity='0.6'/></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<title>Samsun İftar Vakti 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ══════════════ TEMA */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
 :root {
-  --bg:        #0b0f0d;
-  --text:      #e8ede9;
-  --sub:       #5a7060;
-  --accent:    #3dba6f;
-  --dim:       rgba(61,186,111,0.09);
-  --border:    rgba(61,186,111,0.15);
-  --glow:      rgba(61,186,111,0.22);
-  --track:     rgba(255,255,255,0.07);
-  --row-alt:   #111815;
-  --today-bg:  rgba(61,186,111,0.13);
-  --today-txt: #3dba6f;
-  --card-bg:   rgba(20,30,24,0.8);
-}
-[data-theme="light"] {
-  --bg:        #f4f8f5;
-  --text:      #1a2b1f;
-  --sub:       #7a9882;
-  --accent:    #27a85a;
-  --dim:       rgba(39,168,90,0.07);
-  --border:    rgba(39,168,90,0.16);
-  --glow:      rgba(39,168,90,0.18);
-  --track:     rgba(0,0,0,0.07);
-  --row-alt:   #eaf2ec;
-  --today-bg:  rgba(39,168,90,0.12);
-  --today-txt: #1e8847;
-  --card-bg:   rgba(255,255,255,0.85);
+  --accent: #f97316;
+  --bg: #0a0a0a;
+  --surface: #131313;
+  --border: #222;
+  --text: #f0f0f0;
+  --muted: #888;
+  --dim: #444;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);
-  font-family:'Nunito',sans-serif;
-  transition:background .6s, color .4s;
-  min-height:100vh;
-  overflow-x:hidden;
-}
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
 
-/* ══════════════ TEMA BUTONU */
-.theme-btn{
-  position:fixed;top:18px;left:18px;z-index:200;
-  width:44px;height:44px;border-radius:10px;
-  background:var(--dim);border:1px solid var(--border);
-  color:var(--accent);font-size:1.2rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s,transform .15s;
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; background: var(--bg); z-index: 99;
 }
-.theme-btn:hover{background:rgba(61,186,111,.18);transform:scale(1.06);}
+.logo { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -.02em; }
+.logo span { color: var(--accent); }
+.header-right { display: flex; gap: 8px; }
+.hbtn {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 7px; color: var(--muted);
+  font-size: 12px; padding: 6px 13px;
+  cursor: pointer; transition: all .15s; font-family: inherit; font-weight: 500;
+}
+.hbtn:hover { border-color: #3a3a3a; color: #ccc; }
+.hbtn.on { color: var(--accent); border-color: var(--accent); background: #1a0d00; }
 
-/* ══════════════ BİLDİRİM BUTONU */
-.notif-btn{
-  position:fixed;top:18px;left:70px;z-index:200;
-  width:44px;height:44px;border-radius:10px;
-  background:var(--dim);border:1px solid var(--border);
-  color:var(--accent);font-size:1.1rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s,transform .15s;
+#fw { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+.toast {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  background: #1a1a1a; border: 1px solid #333; border-radius: 10px;
+  padding: 11px 24px; font-size: 13px; font-weight: 500; color: #eee;
+  opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 998; white-space: nowrap;
 }
-.notif-btn:hover{background:rgba(61,186,111,.18);transform:scale(1.06);}
-.notif-btn.aktif{background:rgba(61,186,111,.2);border-color:var(--accent);}
+.toast.show { opacity: 1; }
 
-/* ══════════════ AMBIENT + SHAPES */
-.ambient{
-  position:fixed;width:560px;height:560px;
-  background:radial-gradient(circle,var(--glow) 0%,transparent 65%);
-  top:40%;left:50%;transform:translate(-50%,-50%);
-  pointer-events:none;z-index:0;
-  animation:pulse 5s ease-in-out infinite;
-  transition:background 1.5s;
-}
-/* İftar renk geçişi için özel ambient */
-.ambient.iftar-yakın{
-  background:radial-gradient(circle,rgba(240,160,40,0.28) 0%,transparent 65%);
-}
-.ambient.iftar-tam{
-  background:radial-gradient(circle,rgba(240,80,40,0.22) 0%,transparent 65%);
-}
-@keyframes pulse{0%,100%{opacity:.55;}50%{opacity:1;}}
+.container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
 
-.shapes{position:fixed;inset:0;pointer-events:none;z-index:0;}
-.sh{position:absolute;border:1.5px solid rgba(61,186,111,0.10);border-radius:50%;animation:floatUp ease-in-out infinite;}
-[data-theme="light"] .sh{border-color:rgba(39,168,90,0.08);}
-.sh.diamond{border-radius:0;animation-name:floatDia;}
-.sh.tri{border:none;background:none;width:0!important;height:0!important;
-  border-left:8px solid transparent;border-right:8px solid transparent;
-  border-bottom:14px solid rgba(61,186,111,0.08);animation-name:floatTri;}
-[data-theme="light"] .sh.tri{border-bottom-color:rgba(39,168,90,0.07);}
-@keyframes floatUp{0%,100%{transform:translateY(0) rotate(0deg);opacity:.32;}50%{transform:translateY(-28px) rotate(5deg);opacity:.65;}}
-@keyframes floatDia{0%,100%{transform:rotate(45deg) translateY(0);opacity:.38;}50%{transform:rotate(52deg) translateY(-22px);opacity:.72;}}
-@keyframes floatTri{0%,100%{transform:translateY(0);opacity:.28;}50%{transform:translateY(-20px) rotate(4deg);opacity:.58;}}
+.hero { padding: 40px 0 36px; border-bottom: 1px solid var(--border); }
+.hero-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
+.hero-date { font-size: 13px; color: var(--muted); }
+.hero-gun { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: 4px; }
+.hero-hava { font-size: 12px; color: var(--dim); text-align: right; }
+.hero-hava span { color: var(--muted); }
 
-/* ══════════════ HİLAL SVG */
-.hilal{
-  position:fixed;top:14px;right:20px;
-  z-index:200;opacity:.7;
-  animation:hilalFloat 6s ease-in-out infinite;
-}
-@keyframes hilalFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.cd-label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+.hero-title { font-size: 32px; font-weight: 700; color: #fff; letter-spacing: -.03em; margin-bottom: 4px; }
+.hero-vakit { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 22px; }
 
-/* ══════════════ HERO */
-.hero{
-  position:relative;z-index:2;
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:70px 20px 50px;
-}
+.countdown { display: flex; align-items: baseline; margin-bottom: 6px; }
+.cd-part { display: flex; flex-direction: column; align-items: center; min-width: 78px; }
+.cd-num { font-size: 58px; font-weight: 300; color: #fff; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+.cd-unit { font-size: 10px; color: #383838; text-transform: uppercase; letter-spacing: .14em; margin-top: 6px; font-weight: 700; }
+.cd-colon { font-size: 46px; font-weight: 300; color: #252525; padding: 0 2px 14px; }
+.cd-pct { font-size: 12px; color: var(--dim); margin-bottom: 16px; }
 
-/* ══════════════ BAŞLIK */
-.city{font-size:2rem;font-weight:900;color:var(--text);letter-spacing:.07em;text-transform:uppercase;text-align:center;}
-.city span{color:var(--accent);}
-.subtitle{font-size:1.05rem;font-weight:700;color:var(--text);opacity:.8;margin-top:5px;text-align:center;}
-.dateline{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--sub);margin-top:5px;text-align:center;}
+.progress-wrap { margin-bottom: 32px; }
+.progress-track { height: 4px; background: #1c1c1c; border-radius: 4px; overflow: hidden; margin-bottom: 9px; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width .9s ease, background .6s; width: 0%; }
+.progress-labels { display: flex; justify-content: space-between; font-size: 11px; color: #3a3a3a; font-weight: 500; }
 
-/* ══════════════ RAMAZAN GÜN ROZET */
-.gun-rozet{
-  margin-top:12px;
-  display:inline-flex;align-items:center;gap:7px;
-  background:var(--dim);border:1px solid var(--border);
-  border-radius:50px;padding:5px 16px 5px 12px;
-  font-size:.72rem;font-weight:700;color:var(--accent);
-  letter-spacing:.04em;
+.vakitler-label { font-size: 11px; color: #3a3a3a; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; margin-bottom: 10px; }
+.vakitler { display: flex; gap: 5px; }
+.vbtn {
+  flex: 1; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 4px; cursor: pointer;
+  transition: all .15s; display: flex; flex-direction: column;
+  align-items: center; gap: 5px; font-family: inherit;
 }
-.gun-rozet .hilal-mini{font-size:.85rem;}
+.vbtn:hover { border-color: #333; background: #181818; }
+.vbtn.active { border-color: #3a3a3a; background: #1a1a1a; }
+.vbtn-name { font-size: 10px; font-weight: 700; color: #3a3a3a; letter-spacing: .05em; }
+.vbtn-time { font-size: 12px; font-weight: 600; color: #3a3a3a; }
+.vbtn.active .vbtn-name { color: #999; }
+.vbtn.active .vbtn-time { color: #ccc; }
+.vbtn.auto .vbtn-name { color: var(--accent); }
+.vbtn.auto .vbtn-time { color: var(--accent); }
 
-/* ══════════════ HALF-RING */
-.ring-wrap{
-  position:relative;width:360px;height:190px;
-  margin-top:28px;overflow:hidden;
+.section { padding: 32px 0; border-bottom: 1px solid var(--border); }
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.section-title { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+.tabs { display: flex; gap: 5px; }
+.tab {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 7px; color: #555; font-family: inherit;
+  font-size: 12px; font-weight: 600; padding: 5px 14px; cursor: pointer; transition: all .15s;
 }
-.ring-wrap svg{width:360px;height:360px;position:absolute;top:0;left:0;}
-.r-track{fill:none;stroke:var(--track);stroke-width:20;stroke-linecap:round;}
-.r-fill{
-  fill:none;stroke:var(--accent);stroke-width:20;stroke-linecap:round;
-  stroke-dasharray:509;stroke-dashoffset:509;
-  transition:stroke-dashoffset .6s ease,stroke .5s;
-  filter:drop-shadow(0 0 9px var(--glow));
-}
-.ring-info{
-  position:absolute;bottom:22px;left:0;right:0;
-  display:flex;flex-direction:column;align-items:center;gap:2px;z-index:2;
-}
-.ri-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);}
-.ri-vakit{font-size:1rem;font-weight:800;color:var(--accent);letter-spacing:.04em;transition:color .5s;}
-.ri-time{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--sub);}
+.tab:hover { border-color: #333; color: #888; }
+.tab.active { border-color: var(--accent); color: var(--accent); background: #1a0900; }
 
-/* ══════════════ COUNTDOWN */
-.countdown{display:flex;align-items:flex-end;gap:0;margin-top:14px;}
-.cd-block{display:flex;flex-direction:column;align-items:center;min-width:88px;}
-.cd-num{font-family:'JetBrains Mono',monospace;font-size:4rem;font-weight:600;color:var(--text);line-height:1;letter-spacing:-.02em;transition:color .5s;}
-.cd-unit{font-size:.62rem;font-weight:700;letter-spacing:.12em;color:var(--sub);text-transform:uppercase;margin-top:5px;}
-.cd-sep{font-family:'JetBrains Mono',monospace;font-size:3rem;color:var(--accent);padding:0 4px;padding-bottom:8px;opacity:.45;line-height:1;}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #3a3a3a; padding: 9px 10px; text-align: center; border-bottom: 1px solid var(--border); }
+td { padding: 10px; text-align: center; font-size: 13px; color: #666; border-bottom: 1px solid #161616; transition: background .1s; }
+tbody tr:hover td { background: #111 !important; }
+tbody tr.today td { color: #c0c0c0; background: #111; }
+tbody tr.today td:first-child { border-left: 2px solid var(--accent); }
+.td-date { color: #888 !important; font-weight: 600; }
+.td-iftar { color: var(--accent) !important; font-weight: 700; font-size: 14px !important; }
+tbody tr.today .td-iftar { color: #fb923c !important; }
+.kadir td { font-size: 11px; color: #ea580c !important; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 9px 10px; border-left: 2px solid #7c2d12; background: #0f0500 !important; }
 
-/* ══════════════ VAKİT SEÇİCİ */
-.vakit-picker{
-  display:flex;gap:7px;flex-wrap:nowrap;justify-content:center;
-  margin-top:20px;width:100%;max-width:520px;
-}
-.vp-btn{
-  background:var(--dim);border:1.5px solid var(--border);border-radius:12px;
-  color:var(--sub);font-family:'Nunito',sans-serif;
-  font-size:.7rem;font-weight:700;letter-spacing:.03em;
-  padding:8px 8px 7px;cursor:pointer;
-  transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px;
-  line-height:1;flex:1;min-width:0;position:relative;
-}
-.vp-btn .vp-isim{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;text-align:center;}
-.vp-btn .vp-saat{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:400;opacity:.55;white-space:nowrap;}
-.vp-btn:hover{background:rgba(61,186,111,.13);border-color:rgba(61,186,111,.3);color:var(--text);}
-.vp-btn.active{background:var(--accent);border-color:var(--accent);color:#000;box-shadow:0 0 14px var(--glow);}
-.vp-btn.active .vp-saat{opacity:.75;color:#000;}
-.vp-btn.auto-tag::after{content:'●';position:absolute;top:5px;right:5px;font-size:.38rem;opacity:.6;}
-
-/* ══════════════ HAVA DURUMU */
-.hava-card{
-  display:flex;align-items:center;gap:16px;
-  margin-top:18px;
-  background:var(--dim);
-  border:1.5px solid var(--border);
-  border-radius:50px;
-  padding:10px 22px 10px 16px;
-}
-.hava-icon{font-size:1.6rem;line-height:1;}
-.hava-temp{
-  font-family:'JetBrains Mono',monospace;
-  font-size:1.3rem;font-weight:600;
-  color:var(--text);line-height:1;
-}
-.hava-divider{width:1px;height:28px;background:var(--border);}
-.hava-right{display:flex;flex-direction:column;gap:1px;}
-.hava-desc{font-size:.72rem;font-weight:700;color:var(--text);opacity:.8;}
-.hava-extra{font-size:.62rem;color:var(--sub);}
-
-/* ══════════════ VEKİT ANİMASYON OVERLAY */
-.vakit-overlay{
-  position:fixed;inset:0;z-index:300;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  pointer-events:none;opacity:0;
-  transition:opacity .5s;
-}
-.vakit-overlay.show{opacity:1;}
-.vakit-msg{
-  font-size:2rem;font-weight:900;
-  color:var(--accent);letter-spacing:.06em;
-  text-align:center;
-  text-shadow:0 0 30px var(--glow);
-  animation:msgPop .6s cubic-bezier(.19,1,.22,1);
-}
-.vakit-ring-flash{
-  position:fixed;inset:0;
-  background:radial-gradient(circle,var(--glow) 0%,transparent 60%);
-  z-index:299;opacity:0;pointer-events:none;
-  transition:opacity .3s;
-}
-.vakit-ring-flash.flash{opacity:1;animation:flashOut 1.5s ease-out forwards;}
-@keyframes flashOut{0%{opacity:.8;}100%{opacity:0;}}
-@keyframes msgPop{0%{transform:scale(.7);opacity:0;}100%{transform:scale(1);opacity:1;}}
-
-/* ══════════════ SCROLL BUTONU */
-.scroll-hint{
-  margin-top:26px;
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--dim);border:1.5px solid rgba(61,186,111,0.35);
-  border-radius:50px;padding:13px 32px;
-  font-size:.9rem;font-weight:700;color:var(--accent);
-  letter-spacing:.05em;cursor:pointer;
-  animation:bounce 2.5s ease-in-out infinite;
-  transition:background .2s,border-color .2s,box-shadow .2s;
-}
-.scroll-hint:hover{background:rgba(61,186,111,.15);border-color:var(--accent);box-shadow:0 0 20px var(--glow);animation-play-state:paused;}
-@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
-
-/* ══════════════ TAKVİM */
-.calendar-section{
-  position:relative;z-index:2;
-  padding:60px 20px 80px;
-  max-width:780px;margin:0 auto;
-}
-.cal-title{font-size:1.3rem;font-weight:900;color:var(--text);letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;}
-.cal-sub{font-size:.78rem;color:var(--sub);margin-bottom:24px;}
-.mtabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
-.mtab{
-  background:var(--dim);border:1px solid var(--border);border-radius:50px;
-  color:var(--sub);font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:700;
-  padding:7px 20px;cursor:pointer;transition:all .2s;
-}
-.mtab.active{background:var(--accent);color:#000;border-color:var(--accent);}
-.table-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.25);}
-table{width:100%;border-collapse:collapse;font-size:.82rem;}
-th{background:var(--accent);color:#000;font-weight:800;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:13px 10px;text-align:center;}
-td{padding:10px 10px;text-align:center;color:var(--text);border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.78rem;transition:background .2s;}
-tbody tr:nth-child(even) td{background:var(--row-alt);}
-tbody tr:hover td{background:var(--dim)!important;}
-tbody tr.today td{background:var(--today-bg)!important;color:var(--today-txt);font-weight:700;}
-tbody tr.today td:first-child{border-left:3px solid var(--accent);}
-.kadir{text-align:center;padding:14px;background:rgba(61,186,111,.07);color:var(--accent);font-weight:800;font-size:.8rem;letter-spacing:.04em;border-bottom:1px solid var(--border);}
-[data-theme="light"] .kadir{background:rgba(39,168,90,.06);}
-
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+footer { padding: 24px 0 48px; font-size: 12px; color: #2a2a2a; }
 </style>
 </head>
 <body>
 
-<!-- Tema Butonu -->
-<button class="theme-btn" onclick="toggleTheme()"><span id="t-icon">☀️</span></button>
+<canvas id="fw"></canvas>
+<div class="toast" id="toast"></div>
 
-<!-- Bildirim Butonu -->
-<button class="notif-btn" id="notif-btn" onclick="bildirimToggle()" title="Bildirim Aç/Kapat">🔕</button>
+<header>
+  <div class="logo">Samsun <span>İftar</span></div>
+  <div class="header-right">
+    <button class="hbtn" id="theme-btn" onclick="toggleTheme()">☀ Açık mod</button>
+    <button class="hbtn" id="notif-btn" onclick="bildirimToggle()">🔔 Bildirim</button>
+  </div>
+</header>
 
-<!-- Hilal & Yıldız -->
-<div class="hilal">
-  <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
-    <path d="M34 10 C20 10 10 19 10 30 C10 41 20 48 32 48 C22 44 16 37 16 30 C16 21 24 14 34 10Z"
-      fill="var(--accent)" opacity="0.75"/>
-    <circle cx="38" cy="14" r="2.2" fill="var(--accent)" opacity="0.55"/>
-    <circle cx="44" cy="22" r="1.4" fill="var(--accent)" opacity="0.4"/>
-    <circle cx="41" cy="8"  r="1"   fill="var(--accent)" opacity="0.35"/>
-  </svg>
-</div>
+<div class="container">
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-date" id="hero-date">—</div>
+        <div class="hero-gun" id="hero-gun"></div>
+      </div>
+      <div class="hero-hava">Hava: <span id="hava-txt">…</span></div>
+    </div>
 
-<div class="ambient" id="ambient"></div>
-<div class="shapes" id="shapes"></div>
+    <div class="cd-label" id="cd-label">İftara Kalan Süre</div>
+    <div class="hero-title" id="hero-title">İftara Kalan</div>
+    <div class="hero-vakit" id="hero-vakit"></div>
 
-<!-- Vakit Overlay -->
-<div class="vakit-ring-flash" id="ring-flash"></div>
-<div class="vakit-overlay" id="vakit-overlay">
-  <div class="vakit-msg" id="vakit-msg"></div>
-</div>
+    <div class="countdown">
+      <div class="cd-part"><div class="cd-num" id="h">00</div><div class="cd-unit">Saat</div></div>
+      <div class="cd-colon">:</div>
+      <div class="cd-part"><div class="cd-num" id="m">00</div><div class="cd-unit">Dakika</div></div>
+      <div class="cd-colon">:</div>
+      <div class="cd-part"><div class="cd-num" id="s">00</div><div class="cd-unit">Saniye</div></div>
+    </div>
+    <div class="cd-pct" id="cd-pct"></div>
 
-<!-- ══ HERO -->
-<section class="hero">
-  <div class="city">SAM<span>SUN</span></div>
-  <div class="subtitle">İftar Vakti</div>
-  <div class="dateline" id="date-line">YÜKLENİYOR...</div>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+      <div class="progress-labels"><span id="pl-from">—</span><span id="pl-to">—</span></div>
+    </div>
 
-  <!-- Ramazan kaçıncı günü -->
-  <div class="gun-rozet" id="gun-rozet" style="display:none">
-    <span class="hilal-mini">☽</span>
-    <span id="gun-text">Ramazan'ın — günü</span>
+    <div class="vakitler-label">Namaz Vakitleri</div>
+    <div class="vakitler" id="vakitler"></div>
   </div>
 
-  <!-- Yarım daire ring -->
-  <div class="ring-wrap">
-    <svg viewBox="0 0 360 360">
-      <path class="r-track" d="M 18,180 A 162,162 0 0,1 342,180"/>
-      <path class="r-fill" id="rfill" d="M 18,180 A 162,162 0 0,1 342,180"
-        stroke-dasharray="509" stroke-dashoffset="509"/>
-    </svg>
-    <div class="ring-info">
-      <div class="ri-label" id="ri-label">VAKİTE KALAN</div>
-      <div class="ri-vakit" id="ri-vakit">---</div>
-      <div class="ri-time"  id="ri-time">--:--</div>
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Ramazan 2026 İmsakiyesi</span>
+      <div class="tabs" id="tabs"></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Tarih</th><th>İmsak</th><th>Güneş</th><th>Öğle</th><th>İkindi</th><th>Akşam</th><th>Yatsı</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
     </div>
   </div>
 
-
-
-  <!-- Ana geri sayım -->
-  <div class="countdown">
-    <div class="cd-block"><div class="cd-num" id="h">00</div><div class="cd-unit">Saat</div></div>
-    <div class="cd-sep">:</div>
-    <div class="cd-block"><div class="cd-num" id="m">00</div><div class="cd-unit">Dakika</div></div>
-    <div class="cd-sep">:</div>
-    <div class="cd-block"><div class="cd-num" id="s">00</div><div class="cd-unit">Saniye</div></div>
-  </div>
-
-  <!-- Vakit seçici -->
-  <div class="vakit-picker" id="vakit-picker"></div>
-
-  <!-- Hava durumu -->
-  <div class="hava-card" id="hava-card">
-    <div class="hava-icon" id="hava-icon">⏳</div>
-    <div class="hava-temp" id="hava-temp">--°</div>
-    <div class="hava-divider"></div>
-    <div class="hava-right">
-      <div class="hava-desc" id="hava-desc">Yükleniyor...</div>
-      <div class="hava-extra" id="hava-extra">Samsun</div>
-    </div>
-  </div>
-
-  <!-- Scroll butonu -->
-  <div class="scroll-hint" onclick="scrollToCalendar()">
-    <span>↓</span> Ramazan Takvimi
-  </div>
-</section>
-
-<!-- ══ TAKVİM -->
-<section class="calendar-section" id="calendar">
-  <div class="cal-title">Samsun Ramazan Takvimi</div>
-  <div class="cal-sub">2026 · Tüm vakitler yerel saat</div>
-  <div class="mtabs" id="mtabs"></div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>#</th><th>Tarih</th><th>İmsak</th><th>Güneş</th><th>Öğle</th><th>İkindi</th><th>Akşam</th><th>Yatsı</th></tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-</section>
+  <footer>2026 Samsun Ramazan İmsakiyesi · Diyanet vakitleri</footer>
+</div>
 
 <script>
-/* ══════════════════════════════════════ VERİ */
-const imsakiye=[
-  {n:1,  d:"19/02/2026",tarih:"2026-02-19",i:"05:52",g:"07:18",o:"12:54",ik:"15:50",a:"18:20",y:"19:40",ay:"Şubat",kadir:false},
-  {n:2,  d:"20/02/2026",tarih:"2026-02-20",i:"05:51",g:"07:16",o:"12:53",ik:"15:51",a:"18:21",y:"19:41",ay:"Şubat",kadir:false},
-  {n:3,  d:"21/02/2026",tarih:"2026-02-21",i:"05:50",g:"07:15",o:"12:53",ik:"15:52",a:"18:22",y:"19:42",ay:"Şubat",kadir:false},
-  {n:4,  d:"22/02/2026",tarih:"2026-02-22",i:"05:48",g:"07:13",o:"12:53",ik:"15:52",a:"18:23",y:"19:43",ay:"Şubat",kadir:false},
-  {n:5,  d:"23/02/2026",tarih:"2026-02-23",i:"05:47",g:"07:12",o:"12:53",ik:"15:53",a:"18:24",y:"19:44",ay:"Şubat",kadir:false},
-  {n:6,  d:"24/02/2026",tarih:"2026-02-24",i:"05:45",g:"07:10",o:"12:53",ik:"15:54",a:"18:26",y:"19:45",ay:"Şubat",kadir:false},
-  {n:7,  d:"25/02/2026",tarih:"2026-02-25",i:"05:44",g:"07:09",o:"12:53",ik:"15:55",a:"18:27",y:"19:46",ay:"Şubat",kadir:false},
-  {n:8,  d:"26/02/2026",tarih:"2026-02-26",i:"05:43",g:"07:07",o:"12:53",ik:"15:56",a:"18:28",y:"19:47",ay:"Şubat",kadir:false},
-  {n:9,  d:"27/02/2026",tarih:"2026-02-27",i:"05:41",g:"07:06",o:"12:52",ik:"15:57",a:"18:29",y:"19:49",ay:"Şubat",kadir:false},
-  {n:10, d:"28/02/2026",tarih:"2026-02-28",i:"05:40",g:"07:04",o:"12:52",ik:"15:57",a:"18:30",y:"19:50",ay:"Şubat",kadir:false},
-  {n:11, d:"01/03/2026",tarih:"2026-03-01",i:"05:38",g:"07:03",o:"12:52",ik:"15:58",a:"18:31",y:"19:51",ay:"Mart",kadir:false},
-  {n:12, d:"02/03/2026",tarih:"2026-03-02",i:"05:37",g:"07:01",o:"12:52",ik:"15:59",a:"18:33",y:"19:52",ay:"Mart",kadir:false},
-  {n:13, d:"03/03/2026",tarih:"2026-03-03",i:"05:35",g:"07:00",o:"12:52",ik:"16:00",a:"18:34",y:"19:53",ay:"Mart",kadir:false},
-  {n:14, d:"04/03/2026",tarih:"2026-03-04",i:"05:33",g:"06:58",o:"12:51",ik:"16:01",a:"18:35",y:"19:54",ay:"Mart",kadir:false},
-  {n:15, d:"05/03/2026",tarih:"2026-03-05",i:"05:32",g:"06:56",o:"12:51",ik:"16:01",a:"18:36",y:"19:55",ay:"Mart",kadir:false},
-  {n:16, d:"06/03/2026",tarih:"2026-03-06",i:"05:30",g:"06:55",o:"12:51",ik:"16:02",a:"18:37",y:"19:57",ay:"Mart",kadir:false},
-  {n:17, d:"07/03/2026",tarih:"2026-03-07",i:"05:29",g:"06:53",o:"12:51",ik:"16:03",a:"18:38",y:"19:58",ay:"Mart",kadir:false},
-  {n:18, d:"08/03/2026",tarih:"2026-03-08",i:"05:27",g:"06:52",o:"12:51",ik:"16:03",a:"18:40",y:"19:59",ay:"Mart",kadir:false},
-  {n:19, d:"09/03/2026",tarih:"2026-03-09",i:"05:25",g:"06:50",o:"12:50",ik:"16:04",a:"18:41",y:"20:00",ay:"Mart",kadir:false},
-  {n:20, d:"10/03/2026",tarih:"2026-03-10",i:"05:24",g:"06:48",o:"12:50",ik:"16:05",a:"18:42",y:"20:01",ay:"Mart",kadir:false},
-  {n:21, d:"11/03/2026",tarih:"2026-03-11",i:"05:22",g:"06:47",o:"12:50",ik:"16:05",a:"18:43",y:"20:02",ay:"Mart",kadir:false},
-  {n:22, d:"12/03/2026",tarih:"2026-03-12",i:"05:20",g:"06:45",o:"12:50",ik:"16:06",a:"18:44",y:"20:04",ay:"Mart",kadir:false},
-  {n:23, d:"13/03/2026",tarih:"2026-03-13",i:"05:19",g:"06:43",o:"12:49",ik:"16:07",a:"18:45",y:"20:05",ay:"Mart",kadir:false},
-  {n:24, d:"14/03/2026",tarih:"2026-03-14",i:"05:17",g:"06:42",o:"12:49",ik:"16:07",a:"18:46",y:"20:06",ay:"Mart",kadir:false},
-  {n:25, d:"15/03/2026",tarih:"2026-03-15",i:"05:15",g:"06:40",o:"12:49",ik:"16:08",a:"18:47",y:"20:07",ay:"Mart",kadir:false},
-  {n:26, d:"16/03/2026",tarih:"2026-03-16",i:"05:13",g:"06:38",o:"12:48",ik:"16:09",a:"18:49",y:"20:08",ay:"Mart",kadir:true},
-  {n:27, d:"17/03/2026",tarih:"2026-03-17",i:"05:12",g:"06:37",o:"12:48",ik:"16:09",a:"18:50",y:"20:09",ay:"Mart",kadir:false},
-  {n:28, d:"18/03/2026",tarih:"2026-03-18",i:"05:10",g:"06:35",o:"12:48",ik:"16:10",a:"18:51",y:"20:11",ay:"Mart",kadir:false},
-  {n:29, d:"19/03/2026",tarih:"2026-03-19",i:"05:08",g:"06:33",o:"12:48",ik:"16:10",a:"18:52",y:"20:12",ay:"Mart",kadir:false},
+const DATA=[
+  {n:1,d:"19/02",t:"2026-02-19",i:"05:52",g:"07:18",o:"12:54",ik:"15:50",a:"18:20",y:"19:40",ay:"Şubat",k:false},
+  {n:2,d:"20/02",t:"2026-02-20",i:"05:51",g:"07:16",o:"12:53",ik:"15:51",a:"18:21",y:"19:41",ay:"Şubat",k:false},
+  {n:3,d:"21/02",t:"2026-02-21",i:"05:50",g:"07:15",o:"12:53",ik:"15:52",a:"18:22",y:"19:42",ay:"Şubat",k:false},
+  {n:4,d:"22/02",t:"2026-02-22",i:"05:48",g:"07:13",o:"12:53",ik:"15:52",a:"18:23",y:"19:43",ay:"Şubat",k:false},
+  {n:5,d:"23/02",t:"2026-02-23",i:"05:47",g:"07:12",o:"12:53",ik:"15:53",a:"18:24",y:"19:44",ay:"Şubat",k:false},
+  {n:6,d:"24/02",t:"2026-02-24",i:"05:45",g:"07:10",o:"12:53",ik:"15:54",a:"18:26",y:"19:45",ay:"Şubat",k:false},
+  {n:7,d:"25/02",t:"2026-02-25",i:"05:44",g:"07:09",o:"12:53",ik:"15:55",a:"18:27",y:"19:46",ay:"Şubat",k:false},
+  {n:8,d:"26/02",t:"2026-02-26",i:"05:43",g:"07:07",o:"12:53",ik:"15:56",a:"18:28",y:"19:47",ay:"Şubat",k:false},
+  {n:9,d:"27/02",t:"2026-02-27",i:"05:41",g:"07:06",o:"12:52",ik:"15:57",a:"18:29",y:"19:49",ay:"Şubat",k:false},
+  {n:10,d:"28/02",t:"2026-02-28",i:"05:40",g:"07:04",o:"12:52",ik:"15:57",a:"18:30",y:"19:50",ay:"Şubat",k:false},
+  {n:11,d:"01/03",t:"2026-03-01",i:"05:38",g:"07:03",o:"12:52",ik:"15:58",a:"18:31",y:"19:51",ay:"Mart",k:false},
+  {n:12,d:"02/03",t:"2026-03-02",i:"05:37",g:"07:01",o:"12:52",ik:"15:59",a:"18:33",y:"19:52",ay:"Mart",k:false},
+  {n:13,d:"03/03",t:"2026-03-03",i:"05:35",g:"07:00",o:"12:52",ik:"16:00",a:"18:34",y:"19:53",ay:"Mart",k:false},
+  {n:14,d:"04/03",t:"2026-03-04",i:"05:33",g:"06:58",o:"12:51",ik:"16:01",a:"18:35",y:"19:54",ay:"Mart",k:false},
+  {n:15,d:"05/03",t:"2026-03-05",i:"05:32",g:"06:56",o:"12:51",ik:"16:01",a:"18:36",y:"19:55",ay:"Mart",k:false},
+  {n:16,d:"06/03",t:"2026-03-06",i:"05:30",g:"06:55",o:"12:51",ik:"16:02",a:"18:37",y:"19:57",ay:"Mart",k:false},
+  {n:17,d:"07/03",t:"2026-03-07",i:"05:29",g:"06:53",o:"12:51",ik:"16:03",a:"18:38",y:"19:58",ay:"Mart",k:false},
+  {n:18,d:"08/03",t:"2026-03-08",i:"05:27",g:"06:52",o:"12:51",ik:"16:03",a:"18:40",y:"19:59",ay:"Mart",k:false},
+  {n:19,d:"09/03",t:"2026-03-09",i:"05:25",g:"06:50",o:"12:50",ik:"16:04",a:"18:41",y:"20:00",ay:"Mart",k:false},
+  {n:20,d:"10/03",t:"2026-03-10",i:"05:24",g:"06:48",o:"12:50",ik:"16:05",a:"18:42",y:"20:01",ay:"Mart",k:false},
+  {n:21,d:"11/03",t:"2026-03-11",i:"05:22",g:"06:47",o:"12:50",ik:"16:05",a:"18:43",y:"20:02",ay:"Mart",k:false},
+  {n:22,d:"12/03",t:"2026-03-12",i:"05:20",g:"06:45",o:"12:50",ik:"16:06",a:"18:44",y:"20:04",ay:"Mart",k:false},
+  {n:23,d:"13/03",t:"2026-03-13",i:"05:19",g:"06:43",o:"12:49",ik:"16:07",a:"18:45",y:"20:05",ay:"Mart",k:false},
+  {n:24,d:"14/03",t:"2026-03-14",i:"05:17",g:"06:42",o:"12:49",ik:"16:07",a:"18:46",y:"20:06",ay:"Mart",k:false},
+  {n:25,d:"15/03",t:"2026-03-15",i:"05:15",g:"06:40",o:"12:49",ik:"16:08",a:"18:47",y:"20:07",ay:"Mart",k:false},
+  {n:26,d:"16/03",t:"2026-03-16",i:"05:13",g:"06:38",o:"12:48",ik:"16:09",a:"18:49",y:"20:08",ay:"Mart",k:true},
+  {n:27,d:"17/03",t:"2026-03-17",i:"05:12",g:"06:37",o:"12:48",ik:"16:09",a:"18:50",y:"20:09",ay:"Mart",k:false},
+  {n:28,d:"18/03",t:"2026-03-18",i:"05:10",g:"06:35",o:"12:48",ik:"16:10",a:"18:51",y:"20:11",ay:"Mart",k:false},
+  {n:29,d:"19/03",t:"2026-03-19",i:"05:08",g:"06:33",o:"12:48",ik:"16:10",a:"18:52",y:"20:12",ay:"Mart",k:false},
 ];
 
-/* ══════════════════════════════════════ SHAPES */
-[
-  {t:'circle',w:22,top:'11%',left:'4%',dur:6.5,del:0},
-  {t:'circle',w:12,top:'20%',left:'89%',dur:8,del:1},
-  {t:'circle',w:9, top:'68%',left:'93%',dur:7,del:2},
-  {t:'circle',w:16,top:'82%',left:'6%', dur:9,del:.5},
-  {t:'diamond',w:16,top:'36%',left:'5%',dur:9,del:.3},
-  {t:'diamond',w:12,top:'74%',left:'82%',dur:7.5,del:1.5},
-  {t:'tri',top:'17%',left:'80%',dur:8.5,del:.8},
-  {t:'tri',top:'60%',left:'2%', dur:6.5,del:2},
-].forEach(s=>{
-  const el=document.createElement('div');
-  el.classList.add('sh');
-  if(s.t==='diamond') el.classList.add('diamond');
-  else if(s.t==='tri') el.classList.add('tri');
-  if(s.t!=='tri'){el.style.width=s.w+'px';el.style.height=s.w+'px';}
-  el.style.top=s.top;el.style.left=s.left;
-  el.style.animationDuration=s.dur+'s';
-  el.style.animationDelay=s.del+'s';
-  document.getElementById('shapes').appendChild(el);
-});
-
-/* ══════════════════════════════════════ HELPERS */
 const GUNLER=["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
-const AYLAR =["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
-function todayStr(){const n=new Date();return `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;}
-function getBugun(){return imsakiye.find(r=>r.tarih===todayStr())||null;}
+const AYLAR=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+function todayStr(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;}
+function getBugun(){return DATA.find(r=>r.t===todayStr())||null;}
 function toMin(s){const[h,m]=s.split(':').map(Number);return h*60+m;}
-function toMs(s){return toMin(s)*60000;}
-function msToHMS(ms){
-  if(ms<0)ms=0;
-  const h=Math.floor(ms/3600000);
-  const m=Math.floor((ms%3600000)/60000);
-  const s=Math.floor((ms%60000)/1000);
-  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
+function getV(b){return[{n:"İMSAK",s:b.i},{n:"GÜNEŞ",s:b.g},{n:"ÖĞLE",s:b.o},{n:"İKİNDİ",s:b.ik},{n:"AKŞAM",s:b.a},{n:"YATSI",s:b.y}];}
 
-function getVakitler(bugun){
-  if(!bugun)return[];
-  return [
-    {isim:"İMSAK", saat:bugun.i},
-    {isim:"GÜNEŞ", saat:bugun.g},
-    {isim:"ÖĞLE",  saat:bugun.o},
-    {isim:"İKİNDİ",saat:bugun.ik},
-    {isim:"AKŞAM", saat:bugun.a},
-    {isim:"YATSI", saat:bugun.y},
-  ];
-}
+const fw=document.getElementById('fw');const fc=fw.getContext('2d');
+let pts=[],fwOn=false,fwT=null;
+function rsz(){fw.width=innerWidth;fw.height=innerHeight;}rsz();addEventListener('resize',rsz);
+class P{constructor(x,y,c){this.x=x;this.y=y;this.c=c;const a=Math.random()*Math.PI*2,sp=2+Math.random()*6;this.vx=Math.cos(a)*sp;this.vy=Math.sin(a)*sp-2;this.g=.12;this.l=1;this.d=.012+Math.random()*.012;this.r=1.5+Math.random()*2.5;}u(){this.vx*=.98;this.vy+=this.g;this.x+=this.vx;this.y+=this.vy;this.l-=this.d;}dr(){fc.beginPath();fc.arc(this.x,this.y,this.r,0,Math.PI*2);fc.fillStyle=this.c.replace('1)',`${this.l})`);fc.fill();}}
+function lfw(x,y){const C=['rgba(249,115,22,1)','rgba(239,68,68,1)','rgba(251,191,36,1)','rgba(255,255,255,1)'];const c=C[~~(Math.random()*C.length)];for(let i=0;i<55+~~(Math.random()*30);i++)pts.push(new P(x,y,c));}
+function loop(){if(!fwOn){fc.clearRect(0,0,fw.width,fw.height);return;}fc.clearRect(0,0,fw.width,fw.height);pts=pts.filter(p=>p.l>0);pts.forEach(p=>{p.u();p.dr();});requestAnimationFrame(loop);}
+function startFW(){fwOn=true;pts=[];let c=0;const iv=setInterval(()=>{lfw(fw.width*.2+Math.random()*fw.width*.6,fw.height*.1+Math.random()*fw.height*.4);if(++c>=16)clearInterval(iv);},400);loop();if(fwT)clearTimeout(fwT);fwT=setTimeout(()=>{fwOn=false;},9000);}
 
-/* ══════════════════════════════════════ STATE */
-let manuelVakit = null;
-let otoIdx = -1;
+let tT=null;
+function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');if(tT)clearTimeout(tT);tT=setTimeout(()=>el.classList.remove('show'),4000);}
 
-/* ══════════════════════════════════════ ROZET */
-function updateGunRozet(bugun){
-  const el=document.getElementById('gun-rozet');
-  const txt=document.getElementById('gun-text');
-  if(!bugun){el.style.display='none';return;}
-  el.style.display='inline-flex';
-  txt.textContent=`Ramazan'ın ${bugun.n}. günü`;
-}
-
-/* ══════════════════════════════════════ BİLDİRİM */
-let bildirimIzni = false;
-async function bildirimIzniAl(){
-  if(!('Notification' in window)) return;
-  if(Notification.permission === 'granted'){ bildirimIzni=true; return; }
-  if(Notification.permission !== 'denied'){
-    const p = await Notification.requestPermission();
-    bildirimIzni = p === 'granted';
-  }
-}
-function bildirimGonder(baslik, mesaj){
-  if(!bildirimIzni) return;
-  try{
-    new Notification(baslik, {
-      body: mesaj,
-      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">☽</text></svg>',
-      badge:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">☽</text></svg>',
-      vibrate:[200,100,200],
-      tag:'vakit-bildirimi',
-      renotify:true
-    });
-  }catch(e){}
-}
+let notifOn=false;
+async function bildirimIzniAl(){if(!('Notification'in window))return;if(Notification.permission==='granted'){notifOn=true;return;}if(Notification.permission!=='denied'){const p=await Notification.requestPermission();notifOn=p==='granted';}}
+function bildirimGonder(b,m){if(!notifOn)return;try{new Notification(b,{body:m,tag:'vakit',renotify:true});}catch(e){}}
 bildirimIzniAl();
-
-/* ══════════════════════════════════════ TOP PATLAMASI (CANVAS) */
-const canvas = document.createElement('canvas');
-canvas.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:500;';
-document.body.appendChild(canvas);
-const ctx2d = canvas.getContext('2d');
-let particles = [];
-let fireworksActive = false;
-let fireworksTimer = null;
-
-function resizeCanvas(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-class Particle {
-  constructor(x, y, color){
-    this.x = x; this.y = y;
-    this.color = color;
-    const angle = Math.random() * Math.PI * 2;
-    const speed = 3 + Math.random() * 6;
-    this.vx = Math.cos(angle) * speed;
-    this.vy = Math.sin(angle) * speed - 3;
-    this.gravity = 0.15;
-    this.life = 1;
-    this.decay = 0.012 + Math.random() * 0.012;
-    this.size = 3 + Math.random() * 4;
-    this.trail = [];
-  }
-  update(){
-    this.trail.push({x:this.x, y:this.y});
-    if(this.trail.length > 6) this.trail.shift();
-    this.vx *= 0.98;
-    this.vy += this.gravity;
-    this.x += this.vx;
-    this.y += this.vy;
-    this.life -= this.decay;
-  }
-  draw(){
-    // iz
-    for(let i=0;i<this.trail.length;i++){
-      const t = this.trail[i];
-      const alpha = (i/this.trail.length) * this.life * 0.4;
-      ctx2d.beginPath();
-      ctx2d.arc(t.x, t.y, this.size*(i/this.trail.length)*0.7, 0, Math.PI*2);
-      ctx2d.fillStyle = this.color.replace('1)', `${alpha})`);
-      ctx2d.fill();
-    }
-    // top
-    ctx2d.beginPath();
-    ctx2d.arc(this.x, this.y, this.size, 0, Math.PI*2);
-    ctx2d.fillStyle = this.color.replace('1)', `${this.life})`);
-    ctx2d.fill();
-  }
+async function bildirimToggle(){
+  if(!('Notification'in window)){alert('Tarayıcın bildirim desteklemiyor.');return;}
+  if(notifOn){notifOn=false;document.getElementById('notif-btn').textContent='🔔 Bildirim';document.getElementById('notif-btn').classList.remove('on');}
+  else{await bildirimIzniAl();if(notifOn){document.getElementById('notif-btn').textContent='🔔 Açık ✓';document.getElementById('notif-btn').classList.add('on');bildirimGonder('Bildirimler açık','Vakit gelince haber vereceğim!');}else alert('Tarayıcı ayarlarından bildirim iznini aç.');}
 }
 
-function launchFirework(x, y){
-  const COLORS = [
-    'rgba(255,215,0,1)',    // altın
-    'rgba(255,160,30,1)',   // turuncu
-    'rgba(61,186,111,1)',   // yeşil
-    'rgba(255,255,255,1)',  // beyaz
-    'rgba(255,100,100,1)',  // kırmızı
-    'rgba(150,200,255,1)',  // mavi
-  ];
-  const color = COLORS[Math.floor(Math.random()*COLORS.length)];
-  const count = 60 + Math.floor(Math.random()*40);
-  for(let i=0;i<count;i++){
-    particles.push(new Particle(x, y, color));
-  }
-}
-
-function fireworksLoop(){
-  if(!fireworksActive){ ctx2d.clearRect(0,0,canvas.width,canvas.height); return; }
-  ctx2d.clearRect(0,0,canvas.width,canvas.height);
-  particles = particles.filter(p => p.life > 0);
-  particles.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(fireworksLoop);
-}
-
-function startFireworks(){
-  fireworksActive = true;
-  particles = [];
-  const W = canvas.width, H = canvas.height;
-  // İlk 8 saniye boyunca rastgele havai fişek at
-  let count = 0;
-  const interval = setInterval(()=>{
-    const x = W*0.2 + Math.random()*W*0.6;
-    const y = H*0.1 + Math.random()*H*0.5;
-    launchFirework(x, y);
-    count++;
-    if(count >= 18){ clearInterval(interval); }
-  }, 450);
-  fireworksLoop();
-  if(fireworksTimer) clearTimeout(fireworksTimer);
-  fireworksTimer = setTimeout(()=>{
-    fireworksActive = false;
-  }, 10000);
-}
-
-/* ══════════════════════════════════════ ZİL ANİMASYON */
-let overlayTimer=null;
-let lastShownVakit=null;
-function showVakitAnim(isim){
-  // Aynı vakiti tekrar gösterme
-  if(lastShownVakit===isim) return;
-  lastShownVakit=isim;
-
-  const mesajlar={
-    "İMSAK":"🌙 Sahur Vakti Başladı",
-    "GÜNEŞ":"☀️ Güneş Doğdu",
-    "ÖĞLE":"🕛 Öğle Vakti",
-    "İKİNDİ":"🕓 İkindi Vakti",
-    "AKŞAM":"🎆 İftar Hayırlı Olsun!",
-    "YATSI":"⭐ Yatsı Vakti",
-  };
-  const msg=mesajlar[isim]||isim+' Vakti';
-  document.getElementById('vakit-msg').textContent=msg;
-  const overlay=document.getElementById('vakit-overlay');
-  const flash=document.getElementById('ring-flash');
-  overlay.classList.add('show');
-  flash.classList.add('flash');
-
-  // İftar'da top patlaması + bildirim özel
-  if(isim==="AKŞAM"){
-    startFireworks();
-    bildirimGonder('🎆 İftar Vakti Geldi!', 'Hayırlı iftarlar! Samsun — ' + new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}));
-  } else {
-    bildirimGonder('🕌 ' + isim + ' Vakti', msg.replace(/^[^\s]+\s/,'') + ' — ' + new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}));
-  }
-
-  if(overlayTimer) clearTimeout(overlayTimer);
-  overlayTimer=setTimeout(()=>{
-    overlay.classList.remove('show');
-    setTimeout(()=>flash.classList.remove('flash'),500);
-  },5000);
-}
-
-
-/* ══════════════════════════════════════ HAVA DURUMU */
-const WMO_CODES={0:'Açık',1:'Az Bulutlu',2:'Parçalı Bulutlu',3:'Kapalı',45:'Sisli',48:'Buzlu Sis',51:'Hafif Çisenti',53:'Çisenti',55:'Yoğun Çisenti',61:'Hafif Yağmur',63:'Yağmurlu',65:'Şiddetli Yağmur',71:'Hafif Kar',73:'Karlı',75:'Yoğun Kar',80:'Sağanak',81:'Kuvvetli Sağanak',82:'Şiddetli Sağanak',95:'Fırtınalı',96:'Dolu',99:'Şiddetli Fırtına'};
-const WMO_ICON={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌦️',63:'🌧️',65:'🌧️',71:'🌨️',73:'❄️',75:'❄️',80:'🌧️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
 async function fetchHava(){
   try{
-    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=41.2867&longitude=36.33&current=temperature_2m,weathercode,windspeed_10m,relativehumidity_2m&wind_speed_unit=kmh&timezone=Europe%2FIstanbul');
-    const d=await r.json();
-    const c=d.current;
-    const code=c.weathercode;
-    document.getElementById('hava-icon').textContent=WMO_ICON[code]||'🌡️';
-    document.getElementById('hava-temp').textContent=Math.round(c.temperature_2m)+'°C';
-    document.getElementById('hava-desc').textContent=WMO_CODES[code]||'Bilinmiyor';
-    document.getElementById('hava-extra').textContent=`💨 ${Math.round(c.windspeed_10m)} km/s · 💧 %${c.relativehumidity_2m}`;
-  }catch(e){
-    document.getElementById('hava-icon').textContent='🌡️';
-    document.getElementById('hava-desc').textContent='Bağlantı yok';
-    document.getElementById('hava-extra').textContent='Samsun';
-  }
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=41.2867&longitude=36.33&current=temperature_2m,weathercode&timezone=Europe%2FIstanbul');
+    const d=await r.json();const c=d.current;
+    const icons={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',51:'🌦️',61:'🌧️',63:'🌧️',71:'🌨️',73:'❄️',80:'🌧️',95:'⛈️'};
+    const descs={0:'Açık',1:'Az bulutlu',2:'Parçalı bulutlu',3:'Kapalı',45:'Sisli',51:'Çisenti',61:'Yağmurlu',63:'Yağmurlu',71:'Karlı',73:'Karlı',80:'Sağanak',95:'Fırtınalı'};
+    document.getElementById('hava-txt').textContent=`${icons[c.weathercode]||''} ${Math.round(c.temperature_2m)}°C · ${descs[c.weathercode]||''}`;
+  }catch(e){document.getElementById('hava-txt').textContent='—';}
 }
-fetchHava();
-setInterval(fetchHava,600000);
+fetchHava();setInterval(fetchHava,600000);
 
-/* ══════════════════════════════════════ VAKİT PİCKER */
-function buildVakitPicker(bugun, autoIdx){
-  const container=document.getElementById('vakit-picker');
-  container.innerHTML='';
-  if(!bugun) return;
-  const vakitler=getVakitler(bugun);
-  vakitler.forEach((v,i)=>{
-    const btn=document.createElement('button');
-    btn.className='vp-btn';
-    const isActive=manuelVakit===v.isim||(manuelVakit===null&&i===autoIdx);
-    const isAuto=manuelVakit===null&&i===autoIdx;
-    if(isActive) btn.classList.add('active');
-    if(isAuto)   btn.classList.add('auto-tag');
-    btn.innerHTML=`<span class="vp-isim">${v.isim}</span><span class="vp-saat">${v.saat}</span>`;
-    btn.onclick=()=>{
-      manuelVakit=(manuelVakit===v.isim)?null:v.isim;
-      buildVakitPicker(bugun,otoIdx);
-    };
-    container.appendChild(btn);
+let manV=null,otoIdx=-1,lastShown=null;
+
+function buildV(bugun,ai){
+  const c=document.getElementById('vakitler');c.innerHTML='';
+  if(!bugun)return;
+  getV(bugun).forEach((v,i)=>{
+    const b=document.createElement('button');b.className='vbtn';
+    const isAuto=manV===null&&i===ai;
+    if(manV===v.n||isAuto)b.classList.add('active');
+    if(isAuto)b.classList.add('auto');
+    b.innerHTML=`<span class="vbtn-name">${v.n}</span><span class="vbtn-time">${v.s}</span>`;
+    b.onclick=()=>{manV=(manV===v.n)?null:v.n;buildV(bugun,otoIdx);};
+    c.appendChild(b);
   });
 }
 
-/* ══════════════════════════════════════ RING */
-const ARC_LEN=509;
-function updateTimer(){
+function tick(){
   const now=new Date();
-  document.getElementById('date-line').textContent=
-    `${now.getDate()} ${AYLAR[now.getMonth()]} ${now.getFullYear()} / ${GUNLER[now.getDay()]}`;
-
   const bugun=getBugun();
-  updateGunRozet(bugun);
+  document.getElementById('hero-date').textContent=`${now.getDate()} ${AYLAR[now.getMonth()]} ${now.getFullYear()} · ${GUNLER[now.getDay()]}`;
+  document.getElementById('hero-gun').textContent=bugun?`☽ Ramazan'ın ${bugun.n}. günü`:'';
 
   if(!bugun){
-    document.getElementById('ri-label').textContent='RAMAZAN DIŞI';
-    document.getElementById('ri-vakit').textContent='---';
-    document.getElementById('ri-time').textContent='--:--';
+    document.getElementById('hero-title').textContent='Ramazan Dışı';
     ['h','m','s'].forEach(id=>document.getElementById(id).textContent='--');
+    document.getElementById('prog').style.width='0%';
     return;
   }
 
-  const vakitler=getVakitler(bugun);
+  const vakitler=getV(bugun);
   const nowMin=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
+  let ai=-1;
+  for(let i=0;i<vakitler.length;i++)if(nowMin<toMin(vakitler[i].s)){ai=i;break;}
+  otoIdx=ai;
 
-  // Otomatik en yakın
-  let autoIdx=-1;
-  for(let i=0;i<vakitler.length;i++) if(nowMin<toMin(vakitler[i].saat)){autoIdx=i;break;}
-  otoIdx=autoIdx;
+  if(ai>0){const sec=(nowMin-toMin(vakitler[ai-1].s))*60;if(sec>=0&&sec<5&&lastShown!==vakitler[ai-1].n){lastShown=vakitler[ai-1].n;if(vakitler[ai-1].n==='AKŞAM'){startFW();showToast('İftar hayırlı olsun 🌙');bildirimGonder('İftar','Hayırlı iftarlar!');}else{showToast(vakitler[ai-1].n+' vakti girdi');bildirimGonder(vakitler[ai-1].n,'Vakit girdi.');}}}
 
-  // Vakit geldi mi? (animasyon)
-  if(autoIdx>0){
-    const prevName=vakitler[autoIdx-1].isim;
-    const secsSince=(nowMin-toMin(vakitler[autoIdx-1].saat))*60;
-    if(secsSince>=0&&secsSince<5){
-      showVakitAnim(prevName);
-    }
-  } else if(autoIdx===-1){
-    // Yatsı geçti
-    const secsSince=(nowMin-toMin(vakitler[5].saat))*60;
-    if(secsSince>=0&&secsSince<5){
-      showVakitAnim(vakitler[5].isim);
-    }
-  }
+  let hi=manV!==null?vakitler.findIndex(v=>v.n===manV):ai;
+  if(hi===-1)hi=ai;
+  buildV(bugun,otoIdx);
 
-  // Hangi vakite sayaç
-  let hedefIdx=manuelVakit!==null?vakitler.findIndex(v=>v.isim===manuelVakit):autoIdx;
-  if(hedefIdx===-1) hedefIdx=autoIdx;
+  let hedef,prevS,prevN;
+  if(hi===-1){const idx=DATA.findIndex(r=>r.t===todayStr());const yn=idx>=0&&idx+1<DATA.length?DATA[idx+1]:null;hedef={n:'İMSAK',s:yn?yn.i:'05:00'};prevS=bugun.y;prevN='YATSI';}
+  else{hedef=vakitler[hi];prevS=hi===0?'00:00':vakitler[hi-1].s;prevN=hi===0?'':vakitler[hi-1].n;}
 
-  // Picker güncelle
-  buildVakitPicker(bugun,otoIdx);
+  const[hh,mm]=hedef.s.split(':').map(Number);
+  const tgt=new Date(now);tgt.setHours(hh,mm,0,0);if(tgt<=now)tgt.setDate(tgt.getDate()+1);
+  const[ph,pm]=prevS.split(':').map(Number);
+  const prv=new Date(now);prv.setHours(ph,pm,0,0);if(prv>now)prv.setDate(prv.getDate()-1);
 
-  let hedef,prevSaat;
-  if(hedefIdx===-1){
-    const idx=imsakiye.findIndex(r=>r.tarih===todayStr());
-    const yarin=idx>=0&&idx+1<imsakiye.length?imsakiye[idx+1]:null;
-    hedef={isim:"İMSAK",saat:yarin?yarin.i:"05:00"};
-    prevSaat=bugun.y;
-  } else {
-    hedef=vakitler[hedefIdx];
-    prevSaat=hedefIdx===0?"00:00":vakitler[hedefIdx-1].saat;
-  }
+  const diff=tgt-now;
+  const pct=Math.max(0,Math.min(1,(now-prv)/(tgt-prv)))*100;
+  const isIftar=hedef.n==='AKŞAM';
+  const isSahur=hedef.n==='İMSAK';
+  const barColor=isIftar?'#f97316':isSahur?'#fb923c':'#ef4444';
 
-  const[hh,mm]=hedef.saat.split(':').map(Number);
-  const target=new Date(now);target.setHours(hh,mm,0,0);
-  if(target<=now)target.setDate(target.getDate()+1);
-  const[ph,pm]=prevSaat.split(':').map(Number);
-  const prev=new Date(now);prev.setHours(ph,pm,0,0);
-  if(prev>now)prev.setDate(prev.getDate()-1);
+  document.getElementById('cd-label').textContent=isIftar?'İFTARA KALAN SÜRE':isSahur?'SAHURA KALAN SÜRE':hedef.n+' VAKTİNE KALAN';
+  document.getElementById('hero-title').textContent=isIftar?'İftara Kalan':isSahur?'Sahura Kalan':hedef.n+' Vaktine Kalan';
+  document.getElementById('hero-vakit').textContent=hedef.n+' · '+hedef.s;
+  document.getElementById('hero-vakit').style.color=barColor;
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('prog').style.background=barColor;
+  document.getElementById('cd-pct').textContent=`%${Math.round(pct)} tamamlandı`;
+  document.getElementById('pl-from').textContent=(prevN?prevN+' ':'')+prevS;
+  document.getElementById('pl-to').textContent=hedef.n+' '+hedef.s;
 
-  const diff=target-now;
-  const total=target-prev;
-  const elapsed=now-prev;
-  const pct=Math.max(0,Math.min(1,elapsed/total));
-  const offset=ARC_LEN*(1-pct);
-
-  const rf=document.getElementById('rfill');
-  rf.style.strokeDashoffset=offset;
-
-  // Ring rengi + sayaç rengi
-  const dH=Math.floor(diff/3600000);
-  const dM=Math.floor((diff%3600000)/60000);
-  let ringColor='var(--accent)';let ringFilter='drop-shadow(0 0 9px var(--glow))';
-  if(hedef.isim==="AKŞAM"){
-    // Yakınlığa göre sarı tonu
-    if(dH===0&&dM<10){
-      ringColor='#ff8c00';ringFilter='drop-shadow(0 0 14px rgba(255,140,0,.6))';
-    } else {
-      ringColor='#f0c040';ringFilter='drop-shadow(0 0 10px rgba(240,192,64,.5))';
-    }
-  } else if(hedef.isim==="İMSAK"){
-    ringColor='#6ec6f0';ringFilter='drop-shadow(0 0 10px rgba(110,198,240,.4))';
-  }
-  rf.style.stroke=ringColor;
-  rf.style.filter=ringFilter;
-
-  document.getElementById('ri-label').textContent=hedef.isim+' VAKTİNE KALAN';
-  document.getElementById('ri-vakit').textContent=hedef.isim;
-  document.getElementById('ri-vakit').style.color=ringColor;
-  document.getElementById('ri-time').textContent=hedef.saat;
-
-  const dS=Math.floor((diff%60000)/1000);
+  const dH=Math.floor(diff/3600000),dM=Math.floor((diff%3600000)/60000),dS=Math.floor((diff%60000)/1000);
   document.getElementById('h').textContent=String(dH).padStart(2,'0');
   document.getElementById('m').textContent=String(dM).padStart(2,'0');
   document.getElementById('s').textContent=String(dS).padStart(2,'0');
-
 }
 
-async function bildirimToggle(){
-  if(!('Notification' in window)){
-    alert('Tarayıcın bildirim desteklemiyor.');return;
-  }
-  if(bildirimIzni){
-    bildirimIzni=false;
-    document.getElementById('notif-btn').textContent='🔕';
-    document.getElementById('notif-btn').classList.remove('aktif');
-  } else {
-    await bildirimIzniAl();
-    if(bildirimIzni){
-      document.getElementById('notif-btn').textContent='🔔';
-      document.getElementById('notif-btn').classList.add('aktif');
-      bildirimGonder('✅ Bildirimler Açık','Vakit gelince haber vereceğim!');
-    } else {
-      alert('Tarayıcı ayarlarından bildirim iznini açman gerekiyor.');
-    }
-  }
-}
-
-/* ══════════════════════════════════════ TEMA */
-let isLight=false;
+let light=false;
 function toggleTheme(){
-  isLight=!isLight;
-  document.documentElement.setAttribute('data-theme',isLight?'light':'dark');
-  document.getElementById('t-icon').textContent=isLight?'🌙':'☀️';
+  light=!light;
+  document.documentElement.style.setProperty('--bg',light?'#f9f9f9':'#0a0a0a');
+  document.documentElement.style.setProperty('--surface',light?'#efefef':'#131313');
+  document.documentElement.style.setProperty('--border',light?'#e0e0e0':'#222');
+  document.documentElement.style.setProperty('--text',light?'#111':'#f0f0f0');
+  document.documentElement.style.setProperty('--muted',light?'#555':'#888');
+  document.documentElement.style.setProperty('--dim',light?'#777':'#444');
+  document.body.style.background=light?'#f9f9f9':'#0a0a0a';
+  document.body.style.color=light?'#111':'#f0f0f0';
+  document.getElementById('theme-btn').textContent=light?'🌙 Koyu mod':'☀ Açık mod';
 }
 
-/* ══════════════════════════════════════ SCROLL */
-function scrollToCalendar(){
-  document.getElementById('calendar').scrollIntoView({behavior:'smooth'});
-}
-
-/* ══════════════════════════════════════ TABLO */
-const aylar=[...new Set(imsakiye.map(r=>r.ay))];
+const aylar=[...new Set(DATA.map(r=>r.ay))];
 let aktifAy=getBugun()?.ay||aylar[0];
-
 function renderTable(){
-  const tbody=document.getElementById('tbody');
-  const bt=todayStr();
-  tbody.innerHTML='';
-  let kadirEklendi=false;
-  imsakiye.filter(r=>r.ay===aktifAy).forEach(r=>{
-    if(r.kadir&&!kadirEklendi){
-      const sep=document.createElement('tr');
-      sep.innerHTML=`<td colspan="8" class="kadir">✦ Kadir Gecesi (18 Mart 2026)</td>`;
-      tbody.appendChild(sep);kadirEklendi=true;
-    }
-    const tr=document.createElement('tr');
-    if(r.tarih===bt) tr.classList.add('today');
-    tr.innerHTML=`
-      <td style="color:var(--sub);font-size:.72rem">${r.n}</td>
-      <td style="font-family:Nunito;font-size:.78rem;font-weight:600">${r.d}</td>
-      <td>${r.i}</td><td>${r.g}</td><td>${r.o}</td><td>${r.ik}</td>
-      <td style="font-weight:700;color:var(--accent)">${r.a}</td>
-      <td>${r.y}</td>`;
+  const tbody=document.getElementById('tbody');const bt=todayStr();tbody.innerHTML='';
+  DATA.filter(r=>r.ay===aktifAy).forEach(r=>{
+    if(r.k){const s=document.createElement('tr');s.className='kadir';s.innerHTML=`<td colspan="8">✦ Kadir Gecesi — 16 Mart 2026</td>`;tbody.appendChild(s);}
+    const tr=document.createElement('tr');if(r.t===bt)tr.classList.add('today');
+    tr.innerHTML=`<td style="color:#2e2e2e;font-size:12px">${r.n}</td><td class="td-date">${r.d}</td><td>${r.i}</td><td>${r.g}</td><td>${r.o}</td><td>${r.ik}</td><td class="td-iftar">${r.a}</td><td>${r.y}</td>`;
     tbody.appendChild(tr);
   });
 }
-
 function buildTabs(){
-  const c=document.getElementById('mtabs');
+  const c=document.getElementById('tabs');
   aylar.forEach(ay=>{
-    const btn=document.createElement('button');
-    btn.className='mtab'+(ay===aktifAy?' active':'');
-    btn.textContent=ay;
-    btn.onclick=()=>{
-      aktifAy=ay;
-      document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');renderTable();
-    };
-    c.appendChild(btn);
+    const b=document.createElement('button');b.className='tab'+(ay===aktifAy?' active':'');b.textContent=ay;
+    b.onclick=()=>{aktifAy=ay;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderTable();};
+    c.appendChild(b);
   });
 }
 
-buildTabs();
-renderTable();
-setInterval(updateTimer,1000);
-updateTimer();
+buildTabs();renderTable();
+setInterval(tick,1000);tick();
 </script>
 </body>
 </html>
