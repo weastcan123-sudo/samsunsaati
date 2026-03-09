@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samsun İftar Vakti 2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23f97316'/><path d='M22 16C22 20.418 18.418 24 14 24C9.582 24 6 20.418 6 16C6 11.582 9.582 8 14 8C11 10.5 11 21.5 17.5 21.5C20.5 20.2 22 18.3 22 16Z' fill='white'/><path d='M23 9L23.6 11L25.5 11.6L23.6 12.2L23 14L22.4 12.2L20.5 11.6L22.4 11Z' fill='white'/></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,8 +30,9 @@ header {
   display: flex; align-items: center; justify-content: space-between;
   position: sticky; top: 0; background: var(--bg); z-index: 99;
 }
-.logo { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -.02em; }
-.logo span { color: var(--accent); }
+.logo { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -.02em; display: flex; align-items: center; gap: 8px; }
+.logo-icon { display: flex; align-items: center; }
+.logo-text span { color: var(--accent); }
 .header-right { display: flex; gap: 8px; }
 .hbtn {
   background: var(--surface); border: 1px solid var(--border);
@@ -60,12 +62,12 @@ header {
 .hero-hava span { color: var(--muted); }
 
 .cd-label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
-.hero-title { font-size: 32px; font-weight: 700; color: #fff; letter-spacing: -.03em; margin-bottom: 4px; }
+.hero-title { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: -.03em; margin-bottom: 4px; }
 .hero-vakit { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 22px; }
 
 .countdown { display: flex; align-items: baseline; margin-bottom: 6px; }
 .cd-part { display: flex; flex-direction: column; align-items: center; min-width: 78px; }
-.cd-num { font-size: 58px; font-weight: 300; color: #fff; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+.cd-num { font-size: 58px; font-weight: 300; color: var(--text); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
 .cd-unit { font-size: 10px; color: #383838; text-transform: uppercase; letter-spacing: .14em; margin-top: 6px; font-weight: 700; }
 .cd-colon { font-size: 46px; font-weight: 300; color: #252525; padding: 0 2px 14px; }
 .cd-pct { font-size: 12px; color: var(--dim); margin-bottom: 16px; }
@@ -125,7 +127,17 @@ footer { padding: 24px 0 48px; font-size: 12px; color: #2a2a2a; }
 <div class="toast" id="toast"></div>
 
 <header>
-  <div class="logo">Samsun <span>İftar</span></div>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Crescent moon -->
+        <path d="M20 14C20 17.866 16.866 21 13 21C9.134 21 6 17.866 6 14C6 10.134 9.134 7 13 7C10.5 9 10.5 19 16 19.5C18.5 18.5 20 16.4 20 14Z" fill="#f97316"/>
+        <!-- Star -->
+        <path d="M21 8L21.5 9.5L23 10L21.5 10.5L21 12L20.5 10.5L19 10L20.5 9.5Z" fill="#f97316"/>
+      </svg>
+    </div>
+    <div class="logo-text">Samsun <span>İftar</span></div>
+  </div>
   <div class="header-right">
     <button class="hbtn" id="theme-btn" onclick="toggleTheme()">☀ Açık mod</button>
     <button class="hbtn" id="notif-btn" onclick="bildirimToggle()">🔔 Bildirim</button>
@@ -327,14 +339,18 @@ function tick(){
 let light=false;
 function toggleTheme(){
   light=!light;
-  document.documentElement.style.setProperty('--bg',light?'#f9f9f9':'#0a0a0a');
-  document.documentElement.style.setProperty('--surface',light?'#efefef':'#131313');
-  document.documentElement.style.setProperty('--border',light?'#e0e0e0':'#222');
-  document.documentElement.style.setProperty('--text',light?'#111':'#f0f0f0');
-  document.documentElement.style.setProperty('--muted',light?'#555':'#888');
-  document.documentElement.style.setProperty('--dim',light?'#777':'#444');
-  document.body.style.background=light?'#f9f9f9':'#0a0a0a';
+  const r=document.documentElement.style;
+  r.setProperty('--bg',light?'#f7f7f7':'#0a0a0a');
+  r.setProperty('--surface',light?'#ebebeb':'#131313');
+  r.setProperty('--border',light?'#d8d8d8':'#222');
+  r.setProperty('--text',light?'#111':'#f0f0f0');
+  r.setProperty('--muted',light?'#555':'#888');
+  r.setProperty('--dim',light?'#777':'#444');
+  document.body.style.background=light?'#f7f7f7':'#0a0a0a';
   document.body.style.color=light?'#111':'#f0f0f0';
+  // fix hardcoded colors in light mode
+  document.querySelectorAll('.cd-unit').forEach(el=>el.style.color=light?'#aaa':'#383838');
+  document.querySelectorAll('.cd-colon').forEach(el=>el.style.color=light?'#ccc':'#252525');
   document.getElementById('theme-btn').textContent=light?'🌙 Koyu mod':'☀ Açık mod';
 }
 
